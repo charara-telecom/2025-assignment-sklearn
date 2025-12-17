@@ -12,7 +12,8 @@ month i+1 for each consecutive month pair.
 
 Use `pytest test_sklearn_questions.py` at the repository root to run the
 tests. For developer guidance on custom estimators, see:
-https://scikit-learn.org/stable/developers/develop.html#rolling-your-own-estimator
+https://scikit-learn.org/stable/developers/develop.html
+# rolling-your-own-estimator
 """
 
 import numpy as np
@@ -163,10 +164,15 @@ class MonthlySplit(BaseCrossValidator):
             return X.index
 
         if not isinstance(X, pd.DataFrame):
-            raise ValueError("X must be a pandas DataFrame when time_col != 'index'.")
+            raise ValueError(
+                "X must be a pandas DataFrame when "
+                "time_col != 'index'."
+            )
         if self.time_col not in X.columns:
             raise ValueError(
-                "Column '{}' not found in X.".format(self.time_col)
+                "Column '{}' not found in X.".format(
+                    self.time_col
+                )
             )
         if not pd.api.types.is_datetime64_any_dtype(X[self.time_col]):
             raise ValueError(
