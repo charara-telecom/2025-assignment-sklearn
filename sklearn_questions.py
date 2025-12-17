@@ -1,4 +1,5 @@
 """Assignment - making a sklearn estimator and cv splitter.
+
 The goal of this assignment is to implement by yourself:
 - a scikit-learn estimator for the KNearestNeighbors for classification
   tasks and check that it is working properly.
@@ -189,9 +190,13 @@ class MonthlySplit(BaseCrossValidator):
         if not isinstance(X, pd.DataFrame):
             raise ValueError("X must be a pandas DataFrame when time_col != 'index'.")
         if self.time_col not in X.columns:
-            raise ValueError(f"Column '{self.time_col}' not found in X.")
+            raise ValueError(
+                "Column '{}' not found in X.".format(self.time_col)
+            )
         if not pd.api.types.is_datetime64_any_dtype(X[self.time_col]):
-            raise ValueError(f"Column '{self.time_col}' must be datetime dtype.")
+            raise ValueError(
+                "Column '{}' must be datetime dtype.".format(self.time_col)
+            )
 
         return pd.DatetimeIndex(X[self.time_col])
 
